@@ -1,25 +1,47 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import  Row  from 'react-bootstrap/Row';
+import  Col  from 'react-bootstrap/Col';
+import Navbar from 'react-bootstrap/Navbar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar style={{backgroundColor: "#f5e042", height: "150px"}} fixed="top">
+        <Container>
+          <Navbar.Brand>Notes App</Navbar.Brand>
+  
+        </Container>
+      </Navbar>
+     
+      <div>
+      <Note />
+      </div>
+    
+    
+    
+
+
+    
     </div>
   );
 }
+
+
+function Note() {
+  return (
+    <>
+    
+        <div style={{backgroundColor: "yellow", height: "60px", width: "100px"}}>
+          <p>this is a note </p>
+        </div>
+     
+    </>
+  )
+}
+
 
 export default App;
