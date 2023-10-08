@@ -5,19 +5,25 @@ export function App() {
   const [notes, setNotes] = useState([{title: 'Note 1', content: 'Make notes app'}]);
   const [inputTitle, setInputTitle] = useState("");
   const [inputContent, setInputContent] = useState("");
+  const deleteNote = (i : number) => {
+    const newNotes = [...notes]
+    newNotes.splice(i,1);
+    setNotes(newNotes);
+  }
   return (
     <div>
       <h1> Notes App</h1>
       <div className={styles.notes}>
-      {
-        notes.map(note => (
+      {notes.length ?
+        notes.map((note, i) => (
           <div className={styles.note}>
             <h2>{note.title}</h2>
             <p>{note.content}</p>
+            <button onClick={() => deleteNote(i)}>Delete</button>
           </div>
         
         ))
-      }
+      : <h2>No Notes left</h2>}
       </div>
       <div className={styles.add_note}>
         <input className={styles.title} placeholder='Title' onChange={e => setInputTitle(e.target.value)} value={inputTitle}></input>
