@@ -1,1 +1,33 @@
-/* Your styles goes here. */
+.notes {
+	border: black solid 2px;
+	border-radius: 25px;
+	padding: 0 5px;
+	margin: 0 1em; 
+	margin-bottom: 2em;
+	
+}
+
+.note {
+	border: black solid 2px;
+	border-radius: 20px;
+	padding: 0.3rem;
+	margin: 5px 0;
+}
+
+.add_note {
+	border: black solid 2px;
+	padding: 0.3rem;
+	display: flex;
+	flex-direction: column;
+	margin: 0 1em; 
+}
+
+.content {
+	height: 100px;
+	border-radius: 10px;
+	margin: 1em 0; 
+}
+
+.title {
+	border-radius: 10px;
+}

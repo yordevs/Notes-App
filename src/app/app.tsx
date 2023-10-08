@@ -8,10 +8,10 @@ export function App() {
   return (
     <div>
       <h1> Notes App</h1>
-      <div>
+      <div className={styles.notes}>
       {
         notes.map(note => (
-          <div>
+          <div className={styles.note}>
             <h2>{note.title}</h2>
             <p>{note.content}</p>
           </div>
@@ -19,9 +19,9 @@ export function App() {
         ))
       }
       </div>
-      <div>
-        <input placeholder='Title' onChange={e => setInputTitle(e.target.value)} value={inputTitle}></input>
-        <input placeholder='Content' onChange={e => setInputContent(e.target.value)} value={inputContent}></input>
+      <div className={styles.add_note}>
+        <input className={styles.title} placeholder='Title' onChange={e => setInputTitle(e.target.value)} value={inputTitle}></input>
+        <textarea className={styles.content} placeholder='Content' onChange={e => setInputContent(e.target.value)} value={inputContent}></textarea>
         <button onClick={
           () => {
               setNotes([...notes, {title:inputTitle, content:inputContent}])
