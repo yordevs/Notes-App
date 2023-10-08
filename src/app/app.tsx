@@ -1,5 +1,5 @@
 import styles from './app.module.css';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 interface Note {
   title: string;
@@ -22,10 +22,14 @@ interface NoteEditInput {
 function Note({note, idx, del, edit} : NoteInput) {
   return (
     <div className={styles.note}>
-    <h2>{note.title}</h2>
-    <p>{note.content}</p>
-    <button onClick={() => del(idx)}>Delete</button>
-    <button onClick={() => edit(idx)}>Edit</button>
+      <div className={styles.note_info}>
+        <h2 className={styles.note_title}>{note.title}</h2>
+        <p className={styles.note_content}>{note.content}</p>
+      </div>
+      <div className={styles.note_buttons}>
+        <button onClick={() => del(idx)}>Delete</button>
+        <button onClick={() => edit(idx)}>Edit</button>
+      </div>
   </div>
   )
 }
@@ -37,15 +41,24 @@ function EditableNote({note, idx, save}: NoteEditInput) {
     <div className={styles.editable_note}>
     <input className={styles.title} placeholder='Title' onChange={e => setTitle(e.target.value)} value={title}></input>
     <textarea className={styles.content} placeholder='Content' onChange={e => setContent(e.target.value)} value={content}></textarea> 
+    <div className={styles.note_buttons}>
     <button onClick={() => save(idx, {title, content, inEdit: false})}>Save</button>
+    </div>
   </div>
   )
 }
 
 export function App() {
-  const [notes, setNotes] = useState([{title: 'Note 1', content: 'Make notes app', inEdit:false}]);
+  const localNotesRaw = localStorage.getItem("notes")
+  const localNotes: Note[] = localNotesRaw ? JSON.parse(localNotesRaw) : [];
+  const [notes, setNotes] = useState(localNotes);
   const [inputTitle, setInputTitle] = useState("");
   const [inputContent, setInputContent] = useState("");
+  
+  useEffect(() => {
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }, [notes]);
+  
   const deleteNote = (i : number) => {
     const newNotes = [...notes]
     newNotes.splice(i,1);
@@ -64,7 +77,7 @@ export function App() {
     setNotes(newNotes);
   }
   return (
-    <div>
+    <div className={styles.main}>
       <h1> Notes App</h1>
       <div className={styles.notes}>
       {notes.length ?
@@ -91,11 +104,10 @@ export function App() {
                 setInputTitle("")
                 setInputContent("")
               }
-              setNotes([...notes, {title:inputTitle, content:inputContent, inEdit: false}])
-              setInputTitle("")
-              setInputContent("")
-            }
-          }>Add Note</button>
+            }>
+            Add Note
+            </button>
+      </div>
       </div>
       
     </div>
