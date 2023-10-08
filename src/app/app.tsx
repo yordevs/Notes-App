@@ -22,8 +22,17 @@ export function App() {
       <div className={styles.add_note}>
         <input className={styles.title} placeholder='Title' onChange={e => setInputTitle(e.target.value)} value={inputTitle}></input>
         <textarea className={styles.content} placeholder='Content' onChange={e => setInputContent(e.target.value)} value={inputContent}></textarea>
-        <button onClick={
-          () => {
+        <div>
+          <button onClick={
+            () => {
+                if (!inputTitle || !inputContent) {
+                  alert("Put in a title and content for the note!")
+                  return
+                }
+                setNotes([...notes, {title:inputTitle, content:inputContent, inEdit: false}])
+                setInputTitle("")
+                setInputContent("")
+              }
               setNotes([...notes, {title:inputTitle, content:inputContent}])
               setInputTitle("")
               setInputContent("")
