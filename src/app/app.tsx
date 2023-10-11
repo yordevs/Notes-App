@@ -60,21 +60,21 @@ export function App() {
   }, [notes]);
   
   const deleteNote = (i : number) => {
-    const newNotes = [...notes]
-    newNotes.splice(i,1);
-    setNotes(newNotes);
+    setNotes(notes.filter((_note, j) => i !== j ));
   }
   const editNote = (i : number) => {
-    const newNotes = [...notes]
-    const note = newNotes[i]
-    note.inEdit = true;
-    newNotes.splice(i,1,note);
-    setNotes(newNotes);
+    setNotes(notes.map(
+      (note, j) => 
+      i === j 
+      ? {
+        title: note.title, 
+        content: note.content, 
+        inEdit: true} 
+      : note )
+      );
   }
   const saveNote = (i : number, n: Note) => {
-    const newNotes = [...notes]
-    newNotes.splice(i,1,n);
-    setNotes(newNotes);
+    setNotes(notes.map((note, j) => j === i ? n : note  ));
   }
   return (
     <div className={styles.main}>
